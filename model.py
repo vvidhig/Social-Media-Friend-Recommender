@@ -20,17 +20,23 @@ def calculate_age(dob):
 
 dataset['Age'] = dataset['DOB'].apply(calculate_age)
 
-# One-hot encode categorical features like gender, city, and country
+# One-hot encode gender
 gender_encoded = pd.get_dummies(dataset['Gender'], prefix="Gender")
-location_encoded = pd.get_dummies(dataset[['City', 'Country']], prefix=['City', 'Country'])
 
-# Concatenate all features
-features = pd.concat([interests, gender_encoded, dataset[['Age']], location_encoded], axis=1)
+# One-hot encode location (city and country separately to avoid mismatches)
+city_encoded = pd.get_dummies(dataset['City'], prefix="City")
+country_encoded = pd.get_dummies(dataset['Country'], prefix="Country")
+
+# Concatenate all feature sets and verify dimensions
+features = pd.concat([interests, gender_encoded, dataset[['Age']], city_encoded, country_encoded], axis=1)
+
+# Ensure no duplicate or missing columns
+print("Features shape:", features.shape)
 
 # Compute cosine similarity matrix
 similarity_matrix = cosine_similarity(features.values)
 
-# Save the features and similarity matrix to a pickle file
+# Save features and similarity matrix to a pickle file
 with open('model.pkl', 'wb') as f:
     pickle.dump((features, similarity_matrix), f)
 
