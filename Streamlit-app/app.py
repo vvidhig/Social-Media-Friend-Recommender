@@ -34,11 +34,7 @@ st.markdown("""
 def load_model():
     try:
         with open('model.pkl', 'rb') as f:
-            features, similarity_matrix = pickle.load(f)
-        return features, similarity_matrix
-    except EOFError:
-        st.error("Failed to load the recommendation model. Ensure 'social_media_recommendation.pkl' is in the correct directory and is not corrupted.")
-        return None, None
+
 
 @st.cache_data
 def load_dataset():
@@ -50,8 +46,7 @@ def load_dataset():
         return None
 
 # Load data
-features, similarity_matrix = load_model()
-dataset = load_dataset()
+features, similarity_matrix, dataset = load_model()
 
 if dataset is None or features is None or similarity_matrix is None:
     st.error("Failed to load necessary data. Please check your data files.")
