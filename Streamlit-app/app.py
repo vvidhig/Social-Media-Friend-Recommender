@@ -34,10 +34,11 @@ st.markdown("""
 def load_model():
     try:
         with open('model.pkl', 'rb') as f:
-            return pickle.load(f)
+            features, similarity_matrix, dataset = pickle.load(f)
+            return features, similarity_matrix, dataset
     except Exception as e:
         st.error(f"Error loading model: {str(e)}")
-        return None, None
+        return None, None, None
 
 @st.cache_data
 def load_dataset():
@@ -49,8 +50,7 @@ def load_dataset():
         return None
 
 # Load data
-features, similarity_matrix = load_model()
-dataset = load_dataset()
+features, similarity_matrix, dataset = load_model()
 
 if dataset is None or features is None or similarity_matrix is None:
     st.error("Failed to load necessary data. Please check your data files.")
