@@ -10,4 +10,4 @@ __pycache__/
 .streamlit/
 
 # Ignore data and model files if they are large
-social_media_recommendation.pkl
+model.pkl
