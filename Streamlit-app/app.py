@@ -23,7 +23,7 @@ if features is None or similarity_matrix is None:
 # Load dataset for display purposes
 @st.cache_data
 def load_data():
-    return pd.read_csv('C:/Projects/AI-projects/SocialMediaUsersDataset.csv')
+    return pd.read_csv('SocialMediaUsersDataset.csv')
 
 dataset = load_data()
 
