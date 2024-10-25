@@ -12,7 +12,7 @@ def load_model():
             features, similarity_matrix = pickle.load(f)
         return features, similarity_matrix
     except EOFError:
-        st.error("Failed to load the recommendation model. Ensure 'social_media_recommendation.pkl' is in the correct directory and is not corrupted.")
+        st.error("Failed to load the recommendation model. Ensure 'model.pkl' is in the correct directory and is not corrupted.")
         return None, None
 
 features, similarity_matrix = load_model()
