@@ -12,7 +12,7 @@ def load_model():
             features, similarity_matrix = pickle.load(f)
         return features, similarity_matrix
     except EOFError:
-        st.error("Failed to load the recommendation model. Please ensure 'model.pkl' is in the correct directory and is not corrupted.")
+        st.error("Failed to load the recommendation model. Ensure 'social_media_recommendation.pkl' is in the correct directory and is not corrupted.")
         return None, None
 
 features, similarity_matrix = load_model()
@@ -41,8 +41,22 @@ interest_categories = [
     'Social causes and activism', 'Sports', 'Technology', 'Travel'
 ]
 
-# Checkboxes for interests
-selected_interests = [interest for interest in interest_categories if st.checkbox(interest)]
+# Create two columns for interests
+col1, col2 = st.columns(2)
+
+# Initialize selected_interests list
+selected_interests = []
+
+# Loop through interest categories and add checkboxes to the columns
+with col1:
+    for interest in interest_categories[:len(interest_categories)//2]:
+        if st.checkbox(interest):
+            selected_interests.append(interest)
+
+with col2:
+    for interest in interest_categories[len(interest_categories)//2:]:
+        if st.checkbox(interest):
+            selected_interests.append(interest)
 
 gender_input = st.selectbox("Select your gender", ["Male", "Female"])
 age_input = st.number_input("Enter your age", min_value=10, max_value=100)
@@ -67,17 +81,16 @@ if st.button("Get Friend Recommendations"):
         # Combine all parts of the feature vector
         user_features = np.concatenate([interests_vector, gender_vector, age_vector, location_vector])
 
-        # Ensure user_features matches features' shape
+        # Align with features DataFrame
         user_features_padded = pd.DataFrame([user_features], columns=features.columns).fillna(0)
-        
-        return user_features_padded.values
+        return user_features_padded
 
     user_features = create_user_features(selected_interests, gender_input, age_input, city_input, country_input)
 
     # Calculate similarity with all users in the dataset
     similarities = cosine_similarity(user_features, features).flatten()
 
-    # Get top 5 most similar users (excluding the user themself)
+    # Get top 5 most similar users (excluding the user themselves)
     top_indices = similarities.argsort()[-6:-1][::-1]
     recommendations = dataset.iloc[top_indices][['UserID', 'Name', 'Interests', 'City', 'Country']]
 
