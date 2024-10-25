@@ -10,5 +10,5 @@ __pycache__/
 .streamlit/
 
 # Ignore data and model files if they are large
-# dataset.csv
+dataset.csv
 model.pkl
