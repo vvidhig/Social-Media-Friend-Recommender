@@ -8,7 +8,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 @st.cache_resource
 def load_model():
     try:
-        with open('C:/Projects/AI-projects/model.pkl', 'rb') as f:
+        with open('model.pkl', 'rb') as f:
             features, similarity_matrix = pickle.load(f)
         return features, similarity_matrix
     except EOFError:
