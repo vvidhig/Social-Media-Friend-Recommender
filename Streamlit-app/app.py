@@ -34,9 +34,10 @@ st.markdown("""
 def load_model():
     try:
         with open('model.pkl', 'rb') as f:
-            return pickle.load(f)
-    except Exception as e:
-        st.error(f"Error loading model: {str(e)}")
+            features, similarity_matrix = pickle.load(f)
+        return features, similarity_matrix
+    except EOFError:
+        st.error("Failed to load the recommendation model. Ensure 'social_media_recommendation.pkl' is in the correct directory and is not corrupted.")
         return None, None
 
 @st.cache_data
