@@ -10,4 +10,5 @@ __pycache__/
 .streamlit/
 
 # Ignore data and model files if they are large
+SocialMediaUsersDataset.csv
 model.pkl
