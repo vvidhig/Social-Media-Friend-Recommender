@@ -34,11 +34,7 @@ st.markdown("""
 def load_model():
     try:
         with open('model.pkl', 'rb') as f:
-            features, similarity_matrix, dataset = pickle.load(f)
-            return features, similarity_matrix, dataset
-    except Exception as e:
-        st.error(f"Error loading model: {str(e)}")
-        return None, None, None
+
 
 @st.cache_data
 def load_dataset():
