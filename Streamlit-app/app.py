@@ -23,7 +23,7 @@ st.markdown("""
     .recommendation-card {
         padding: 1rem;
         border-radius: 0.5rem;
-        background-color: #f8f9fa;
+        background-color: #000000;
         margin: 0.5rem 0;
         border: 1px solid #dee2e6;
     }
