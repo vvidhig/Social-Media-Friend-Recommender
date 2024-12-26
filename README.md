@@ -26,8 +26,8 @@
 
 1. Clone the repository:
     ```sh
-    git clone https://github.com/yourusername/social-media-friend-finder.git
-    cd social-media-friend-finder
+    git clone https://github.com/vvidhig/Social-Media-Friend-Recommender.git
+    cd Social-Media-Friend-Recommender
     ```
 
 2. Create and activate a virtual environment:
