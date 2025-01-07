@@ -1,13 +1,9 @@
-# Ignore virtual environment
 venv/
 
-# Ignore cache and system files
 __pycache__/
 *.py[cod]
 *.DS_Store
 
-# Ignore Streamlit configuration and logs
 .streamlit/
 
-# Ignore data and model files if they are large
 Streamlit-app/model.pkl
